@@ -1,5 +1,5 @@
-import { axiosInstance } from "@/utils/axios";
-import axios from "axios";
+// import { axiosInstance } from "@/utils/axios";
+// import axios from "axios";
 
 // Sample Code with axios
 
