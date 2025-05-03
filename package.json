@@ -4,17 +4,21 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run generate-sw-env && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-sw-env": "node swEnvBuild.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.7.0",
     "@tanstack/react-query": "^5.74.4",
     "@tanstack/react-query-devtools": "^5.74.4",
+    "@tanstack/react-table": "^8.21.3",
     "axios": "^1.9.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^16.5.0",
+    "firebase": "^11.6.1",
     "lenis": "^1.2.3",
     "lucide-react": "^0.503.0",
     "motion": "^12.9.2",

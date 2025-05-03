@@ -1,7 +1,9 @@
+import { auth } from "@/auth";
 import MainButton from "@/components/Button/MainButton";
 import Card from "@/components/Homepage/card";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <>
       <main className="mt-24 flex flex-col items-center">
@@ -17,7 +19,7 @@ export default function Home() {
         </div>
         <MainButton
           className="mt-9 text-white bg-primary-blue"
-          label="Login to get access"
+          label={session?.doctor ? "Back to portal" : `Login to get access`}
           href="/login"
         />
         <div className="mt-32 overflow-hidden relative px-[50px] w-full pt-10">

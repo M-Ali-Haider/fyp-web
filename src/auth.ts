@@ -1,9 +1,6 @@
-import axios from "axios";
-import NextAuth, { CredentialsSignin } from "next-auth";
+import NextAuth, { CredentialsSignin, Session } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import Facebook from "next-auth/providers/facebook";
-import Google from "next-auth/providers/google";
-import axiosServer from "./utils/axiosServer";
+import { JWT } from "next-auth/jwt";
 
 export class InvalidLoginError extends CredentialsSignin {
   code = "custom";
@@ -15,76 +12,58 @@ export class InvalidLoginError extends CredentialsSignin {
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    Google,
-    Facebook,
     Credentials({
       credentials: {
-        email: {},
-        otp: {},
+        doctor_id: { label: "Doctor ID", type: "text" },
+        name: { label: "Name", type: "text" },
+        username: { label: "Username", type: "text" },
+        phone_number: { label: "Phone Number", type: "text" },
+        total_patients: { label: "Total Patients", type: "text" },
       },
       async authorize(credentials) {
-        try {
-          const res = await axiosServer.post("/api/auth/verify-otp", {
-            email: credentials.email,
-            otp: credentials.otp,
-          });
-          const { token, name, email } = res.data;
-          if (token && name && email) {
-            return { id: email, name, email, token };
-          }
-          return null;
-        } catch (error) {
-          if (axios.isAxiosError(error)) {
-            const message =
-              error.response?.data?.error || "Something went wrong";
-            throw new InvalidLoginError(message);
-          }
+        const { doctor_id, name, username, phone_number, total_patients } =
+          credentials ?? {};
+
+        if (
+          !doctor_id ||
+          !name ||
+          !username ||
+          !phone_number ||
+          !total_patients
+        ) {
           return null;
         }
+
+        // Type assertion here ensures you're returning a valid User
+        return {
+          doctor_id: doctor_id as string,
+          name: name as string,
+          username: username as string,
+          phone_number: phone_number as string,
+          total_patients: total_patients as string,
+        };
       },
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
   callbacks: {
-    async jwt({ token, user, account }) {
-      if (user && account?.type === "credentials") {
-        const customUser = user as typeof user & { token: string };
+    async jwt({ token, user }) {
+      if (user?.doctor_id) {
+        token.doctor_id = user.doctor_id;
         token.name = user.name;
-        token.email = user.email;
-        token.accessToken = customUser.token;
-        return token;
-      }
-
-      // Social login logic
-      if (
-        account &&
-        (account.provider === "google" || account.provider === "facebook")
-      ) {
-        try {
-          const res = await axiosServer.post("/api/auth/social-login", {
-            email: token.email,
-            name: token.email,
-          });
-
-          const { token: backendToken } = res.data;
-          token.accessToken = backendToken;
-        } catch (error) {
-          console.error("Failed to sync social login user", error);
-        }
+        token.username = user.username;
+        token.phone_number = user.phone_number;
+        token.total_patients = user.total_patients;
       }
       return token;
     },
-    async session({ session, token }) {
-      if (token) {
-        session.user.name = token.name ?? "";
-        session.user.email = token.email ?? "";
-        return {
-          ...session,
-          accessToken: token.accessToken ?? "",
-        };
-      }
+    async session({ session, token }: { session: Session; token: JWT }) {
+      session.doctor = {
+        doctor_id: token.doctor_id,
+        name: token.name,
+        username: token.username,
+        phone_number: token.phone_number,
+        total_patients: token.total_patients,
+      };
       return session;
     },
   },

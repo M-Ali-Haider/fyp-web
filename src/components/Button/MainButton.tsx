@@ -32,7 +32,7 @@ const MainButton: React.FC<MainButtonProps> = ({
       ) : (
         <button
           className={cn(
-            `px-7 py-4 rounded-full active:scale-90 transition-all duration-300`,
+            `px-7 py-4 rounded-full cursor-pointer active:scale-90 transition-all duration-300`,
             className
           )}
           {...props}

@@ -1,11 +1,16 @@
 import { axiosInstance } from "@/utils/axios";
 import axios from "axios";
 
-export const login = async (email: string, password: string) => {
+export const login = async (
+  username: string,
+  password: string,
+  web_push_token: string
+) => {
   try {
-    const response = await axiosInstance.post(`/api/auth/login`, {
-      email,
+    const response = await axiosInstance.post(`/api/register_doctor_web`, {
+      username,
       password,
+      web_push_token,
     });
     return response.data;
   } catch (error) {

@@ -2,10 +2,14 @@ import LenisScrollProvider from "@/providers/lenis-scroll";
 import { NextThemeProvider } from "@/providers/next-theme";
 import ReactQueryProvider from "@/providers/react-query";
 import type { Metadata } from "next";
-import { DM_Sans, Poppins, Inter } from "next/font/google";
+import { DM_Sans, Inter, Poppins, Noto_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
-import Header from "@/components/Header";
+
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
+  subsets: ["latin"],
+});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -36,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="" suppressHydrationWarning>
       <body
-        className={`${poppins.className} ${dmSans.variable} ${inter.variable} bg-body-gradient antialiased`}
+        className={`${poppins.className} ${dmSans.variable} ${inter.variable} ${notoSans.variable} bg-body-gradient min-h-screen antialiased`}
       >
         <Toaster position="bottom-right" />
         <NextThemeProvider
@@ -46,10 +50,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ReactQueryProvider>
-            <LenisScrollProvider>
-              <Header />
-              {children}
-            </LenisScrollProvider>
+            <LenisScrollProvider>{children}</LenisScrollProvider>
           </ReactQueryProvider>
         </NextThemeProvider>
       </body>

@@ -1,5 +1,5 @@
-// import { axiosInstance } from "@/utils/axios";
-// import axios from "axios";
+import { axiosInstance } from "@/utils/axios";
+import axios from "axios";
 
 // Sample Code with axios
 
@@ -17,3 +17,20 @@
 //     throw error;
 //   }
 // };
+
+// Get Doctor's Patients
+export const getDoctorPatients = async (doctor_id: string) => {
+  try {
+    const response = await axiosInstance.get(
+      `/api/doctors/${doctor_id}/patients_web`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw (
+        error.response?.data || new Error("Error getting doctor's patients")
+      );
+    }
+    throw error;
+  }
+};

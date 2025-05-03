@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@layer utilities{
-  .bg-body-gradient{
+@layer utilities {
+  .bg-body-gradient {
     background: linear-gradient(180deg, #ffffff 10.16%, #dbf0ff 62.42%);
     background-repeat: no-repeat;
   }
@@ -13,19 +13,21 @@
 @theme inline {
   --color-primary-text: #000;
   --color-secondary-text: #6b6b6b;
+  --color-dark-gray: #333333;
   --color-primary-border: #0000001a;
   --color-primary-blue: #0077cc;
   --color-dark-blue: #004080;
   --color-gray-bg: #ededed;
   --color-green-textbh: #41b564;
   --color-green-bg: #ecf9f3;
-  --color-link: #175AE4;
-  --color-offline-text: #AA8345
-  --color-offline-bg: #FFF3DD;
-  --color-placeholder: #AAAAAA
-  --font-poppins:var(--font-poppins);
-  --font-dmSans:var(--font-dm-sans);
+  --color-link: #175ae4;
+  --color-offline-text: #aa8345;
+  --color-offline-bg: #fff3dd;
+  --color-placeholder: #aaaaaa;
+  --font-poppins: var(--font-poppins);
+  --font-dmSans: var(--font-dm-sans);
   --font-inter: var(--font-inter);
+  --font-noto-sans: var(--font-noto-sans);
   /* --color-body-gradient: linear-gradient(180deg,#fff 10.16%, #dbf0ff 62.42%); */
 
   --color-background: var(--background);
