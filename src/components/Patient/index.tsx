@@ -1,16 +1,15 @@
 "use client";
 import { getImagesPatientById, getPatientById } from "@/actions/actions";
 import { useQuery } from "@tanstack/react-query";
-import { LoaderCircle, MoveLeft } from "lucide-react";
-import Link from "next/link";
+import { LoaderCircle } from "lucide-react";
+import Image from "next/image";
+import MainButton from "../Button/MainButton";
+import GoBack from "../goBack";
 import CardWrapper from "../Wrapper/card";
 import MaxWidthWrapper from "../Wrapper/maxWidthWrapper";
 import { AreaChartComponent } from "./AreaChart";
 import PatientTable, { PatientTableSkeleton } from "./PatientTable";
 import PatientProfile, { PatientProfileSkeleton } from "./profile";
-import Image from "next/image";
-import MainButton from "../Button/MainButton";
-import GoBack from "../goBack";
 
 const Patient = ({ patient_id }: { patient_id: string }) => {
   const { data, isLoading, isError } = useQuery({
