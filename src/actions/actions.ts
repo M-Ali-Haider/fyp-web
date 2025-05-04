@@ -34,3 +34,31 @@ export const getDoctorPatients = async (doctor_id: string) => {
     throw error;
   }
 };
+
+export const getPatientById = async (patient_id: string) => {
+  try {
+    const response = await axiosInstance.get(`/api/patients/${patient_id}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw error.response?.data || new Error("Error fetching Patient data");
+    }
+    throw error;
+  }
+};
+
+export const getImagesPatientById = async (patient_id: string) => {
+  try {
+    const response = await axiosInstance.get(
+      `/api/patients/${patient_id}/images`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw (
+        error.response?.data || new Error("Error fetching Patient Images data")
+      );
+    }
+    throw error;
+  }
+};

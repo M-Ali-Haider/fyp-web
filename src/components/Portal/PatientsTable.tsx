@@ -80,7 +80,7 @@ const PatientsTable = ({ data }: { data: Patient[] }) => {
       <tbody>
         {table.getRowModel().rows.map((row, rowIndex, arr) => (
           <tr
-            onClick={() => router.push("/")}
+            onClick={() => router.push(`/patient/${row.original.id}`)}
             key={row.id}
             className={`${
               rowIndex !== arr.length - 1
