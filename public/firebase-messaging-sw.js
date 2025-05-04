@@ -4,15 +4,14 @@ importScripts(
 importScripts(
   "https://www.gstatic.com/firebasejs/10.5.0/firebase-messaging-compat.js"
 );
-importScripts("/swEnv.js");
 
 const firebaseConfig = {
-  apiKey: swEnv.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: swEnv.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: swEnv.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: swEnv.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: swEnv.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: swEnv.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyDoZF2bUKEDvOGypH8jcyZICoAxdx-VR3c",
+  authDomain: "fyp-firebase-b2760.firebaseapp.com",
+  projectId: "fyp-firebase-b2760",
+  storageBucket: "fyp-firebase-b2760.firebasestorage.app",
+  messagingSenderId: "644148142332",
+  appId: "1:644148142332:web:f3db6cd82d24771130b779",
 };
 
 firebase.initializeApp(firebaseConfig);
