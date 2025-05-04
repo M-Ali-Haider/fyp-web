@@ -1,8 +1,8 @@
-import NotificationSVG from "@/assets/notification";
 import { auth } from "@/auth";
-import Link from "next/link";
 import MainButton from "../Button/MainButton";
 import HeaderLogout from "./logout";
+import NotificationsHeader from "./notifications";
+import { NotificationProvider } from "@/context/GetNotifications";
 
 const Header = async () => {
   const session = await auth();
@@ -16,9 +16,9 @@ const Header = async () => {
       <div className="font-bold text-primary-blue text-2xl">FYP</div>
       {session?.doctor ? (
         <div className="flex items-center gap-10">
-          <Link href={"/portal"}>
-            <NotificationSVG className="size-7" />
-          </Link>
+          <NotificationProvider doctorId={session.doctor.doctor_id}>
+            <NotificationsHeader />
+          </NotificationProvider>
           <HeaderLogout />
         </div>
       ) : (

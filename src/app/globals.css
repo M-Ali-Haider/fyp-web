@@ -8,11 +8,22 @@
   }
 }
 
+/* Hide scrollbar but keep scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-primary-text: #000;
   --color-secondary-text: #6b6b6b;
+  --color-noti-text: #35353a;
   --color-dark-gray: #333333;
   --color-primary-border: #0000001a;
   --color-primary-blue: #0077cc;

@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import AllPatients from "@/components/Portal/AllPatients";
+import NotificationsBox from "@/components/Portal/NotificationsBox";
 import YourProfile from "@/components/Portal/YourProfile";
-import CardWrapper from "@/components/Wrapper/card";
 import MaxWidthWrapper from "@/components/Wrapper/maxWidthWrapper";
 
 const Page = async () => {
@@ -19,12 +19,7 @@ const Page = async () => {
           doctor_id={doctor_id}
           total_patients={total_patients}
         />
-        <CardWrapper
-          className="max-w-[484px] w-full min-w-[250px]"
-          title="Notifications"
-        >
-          <div className="flex flex-col max-h-[132px] overflow-y-scroll"></div>
-        </CardWrapper>
+        <NotificationsBox />
       </div>
       <AllPatients />
     </MaxWidthWrapper>

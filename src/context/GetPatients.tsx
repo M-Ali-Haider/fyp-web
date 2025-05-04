@@ -31,7 +31,7 @@ type PatientContextType = {
   error: Error | null;
 };
 
-const db = getFirestore(firebaseApp);
+export const db = getFirestore(firebaseApp);
 
 const PatientContext = createContext<PatientContextType | undefined>(undefined);
 
