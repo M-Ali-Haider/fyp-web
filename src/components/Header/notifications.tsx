@@ -9,7 +9,10 @@ const NotificationsHeader = () => {
     (notification) => !notification.read
   ).length;
   return (
-    <Link href={"/portal"} className="relative">
+    <Link
+      href={"/notifications"}
+      className="relative hover:scale-95 active:scale-90 duration-300 transition-all"
+    >
       <div className="absolute size-4  -top-0.5 right-0 bg-red-500 text-white text-[8px] rounded-full flex items-center justify-center">
         {unreadNotificationsCount}
       </div>

@@ -9,6 +9,8 @@ import { AreaChartComponent } from "./AreaChart";
 import PatientTable, { PatientTableSkeleton } from "./PatientTable";
 import PatientProfile, { PatientProfileSkeleton } from "./profile";
 import Image from "next/image";
+import MainButton from "../Button/MainButton";
+import GoBack from "../goBack";
 
 const Patient = ({ patient_id }: { patient_id: string }) => {
   const { data, isLoading, isError } = useQuery({
@@ -27,12 +29,7 @@ const Patient = ({ patient_id }: { patient_id: string }) => {
 
   return (
     <MaxWidthWrapper className="pb-20">
-      <Link
-        href={"/portal"}
-        className="flex items-center gap-3 text-primary-blue mt-[30px]"
-      >
-        <MoveLeft /> <span>Go back</span>
-      </Link>
+      <GoBack />
       <div className="mt-[29px] mb-[60px] font-dmSans font-semibold text-5xl leading-[35px]">
         Patient Details
       </div>
@@ -74,26 +71,35 @@ const Patient = ({ patient_id }: { patient_id: string }) => {
       ) : isImagesError ? (
         <div className="text-red-500 mt-4">Failed to load patient graphs.</div>
       ) : (
-        <CardWrapper title="Graphs" className="mt-9">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-            {imagesData.images.map(
-              (img: { url: string; filename: string }, index: number) => (
-                <div
-                  key={index}
-                  className="relative w-full aspect-square rounded overflow-hidden shadow"
-                >
-                  <Image
-                    src={img.url}
-                    alt={img.filename}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover"
-                  />
-                </div>
-              )
-            )}
+        <>
+          <CardWrapper title="Graphs" className="mt-9">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+              {imagesData.images.map(
+                (img: { url: string; filename: string }, index: number) => (
+                  <div
+                    key={index}
+                    className="relative w-full aspect-square rounded overflow-hidden shadow"
+                  >
+                    <Image
+                      src={img.url}
+                      alt={img.filename}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover"
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          </CardWrapper>
+          <div className="w-full flex justify-center mt-9">
+            <MainButton
+              href={`/prognosis/${patient_id}`}
+              label="Get Prognosis"
+              className="bg-primary-blue text-white "
+            />
           </div>
-        </CardWrapper>
+        </>
       )}
     </MaxWidthWrapper>
   );

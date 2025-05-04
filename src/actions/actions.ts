@@ -62,3 +62,35 @@ export const getImagesPatientById = async (patient_id: string) => {
     throw error;
   }
 };
+
+export const getPrognosisById = async (patient_id: string) => {
+  try {
+    const response = await axiosInstance.get(`/api/prognosis/${patient_id}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw (
+        error.response?.data ||
+        new Error("Error fetching Patient Prognosis data")
+      );
+    }
+    throw error;
+  }
+};
+
+export const getLLMReport = async (patient_id: string) => {
+  try {
+    const response = await axiosInstance.get(
+      `/api/prognosis_report/${patient_id}`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw (
+        error.response?.data ||
+        new Error("Error fetching Patient Prognosis Report data")
+      );
+    }
+    throw error;
+  }
+};
